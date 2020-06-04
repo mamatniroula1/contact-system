@@ -55,7 +55,7 @@ public class ContactController {
     @DeleteMapping("/{id}")
     public String deleteContact(@PathVariable int id){
 
-        Contact contact = Optional.ofNullable(contactService.findById(id))
+        Optional.ofNullable(contactService.findById(id))
                             .orElseThrow(() -> new ResourceNotFoundException("Contact id not found -> " + id));
 
         contactService.deleteById(id);
