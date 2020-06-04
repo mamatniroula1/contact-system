@@ -29,7 +29,7 @@ public class ContactController {
     }
 
     @GetMapping
-    public List<Contact> getAlleContacts() {
+    public List<Contact> getAllContacts() {
         return contactService.findAll();
     }
 
