@@ -1,6 +1,7 @@
 package com.restapi.contactsystem.service;
 
 import com.restapi.contactsystem.entity.Contact;
+import com.restapi.contactsystem.exceptions.ResourceNotFoundException;
 import com.restapi.contactsystem.repository.ContactRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +25,9 @@ public class ContactServiceImpl implements ContactService{
     @Override
     public Contact findById(int id) {
 
-        Optional<Contact> contact = contactRepository.findById(id);
-        Contact contact1 = null;
-        if(contact.isPresent()){
-            contact1 = contact.get();
-        }else{
-            throw new RuntimeException("Did not find Contact Id -" + id);
-        }
-        return contact1;
+        Contact contact = contactRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Contact not found with id -> " + id));
+        return contact;
     }
 
     @Override
